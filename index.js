@@ -14,25 +14,25 @@ var isBrowser = (typeof window !== "undefined");
 
 var superagent = require('superagent');
 var _ = require('underscore');
-var Qs = require('qs')
+var Qs = require('qs');
 var Deferred = require('simply-deferred').Deferred;
 
 //Add URL params to backbone model or backbone collection URL
-var extendURL = function(url, data){
+var extendURL = function(url, data) {
     var urlArray = url.split('?');
     var queries;
 
     queries = urlArray[1] ? Qs.parse(urlArray[1]) : {};
-    _.extend(queries, object);
+    _.extend(queries, data);
     return urlArray[0] + '?' + Qs.stringify(queries);
-}
+};
 
 
 // ---------------------------------------------------
 // Local vars
 
 // will use $.ajax if jquery is defined globally
-var jQueryAjax = $ ? $.ajax : null;
+var jQueryAjax = (typeof $ !== "undefined") ? $.ajax : null;
 
 var methodsMap = {
     'GET': 'get',
@@ -428,7 +428,7 @@ Request.prototype = {
      * @protected
      */
     _makeDeferred: function () {
-        return ($ && $.Deferred) ? $.Deferred() : new Deferred();
+        return new Deferred();
     },
 
     /**
