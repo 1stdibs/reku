@@ -15,14 +15,7 @@ var isBrowser = (typeof window !== "undefined");
 var superagent = require('superagent');
 var _ = require('underscore');
 var Qs = require('qs')
-var $;
-var Deferred;
-
-// If jQuery or jQuery Deferred isn't defined we'll use simply-deferred
-// for as much jQuery Deferred compatibility as possible
-if (!$ || !$.Deferred) {
-    Deferred = require('simply-deferred').Deferred;
-}
+var Deferred = require('simply-deferred').Deferred;
 
 //Add URL params to backbone model or backbone collection URL
 var extendURL = function(url, data){
@@ -38,6 +31,7 @@ var extendURL = function(url, data){
 // ---------------------------------------------------
 // Local vars
 
+// will use $.ajax if jquery is defined globally
 var jQueryAjax = $ ? $.ajax : null;
 
 var methodsMap = {
